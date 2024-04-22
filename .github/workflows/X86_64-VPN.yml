@@ -1,14 +1,14 @@
-name: DIY_X86_64 OpenWrt
+name: X86_64 VPN-OpenWrt
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: 0 19 * * *
+    - cron: 0 15 * * 5
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/diy-x86.config
+  CONFIG_FILE: configs/x86-vpn.config
   DIY_SCRIPT: diy-script.sh
   CLASH_KERNEL: amd64
   CACHE_TOOLCHAIN: true
