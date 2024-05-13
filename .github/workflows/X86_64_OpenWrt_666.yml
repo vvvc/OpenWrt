@@ -229,7 +229,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt for ${{ env.FIRMWARE_TAG }}-${{ env.DATE }}
-        tag: ${{ env.FIRMWARE_TAG }}_mini
+        tag: ${{ env.FIRMWARE_TAG }}_666
         artifacts: ${{ env.FIRMWARE_PATH }}/*
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
