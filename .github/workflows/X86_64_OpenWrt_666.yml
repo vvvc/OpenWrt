@@ -180,13 +180,6 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
-    # - name: Upload Bin Directory
-    #   uses: actions/upload-artifact@main
-    #   if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-    #   with:
-    #     name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-    #     path: openwrt/bin
-   
     - name: Organize Files
       if: steps.compile.outputs.status == 'success'
       run: |
@@ -198,15 +191,6 @@ jobs:
         rm -rf packages feeds.buildinfo version.buildinfo
         echo "KERNEL=$(cat *.manifest | grep ^kernel | cut -d- -f2 | tr -d ' ')" >> $GITHUB_ENV
         echo "FIRMWARE_PATH=$PWD" >> $GITHUB_ENV
-        
-    # - name: Upload Firmware Directory
-    #   uses: actions/upload-artifact@main
-    #   if: steps.compile.outputs.status == 'success' && !cancelled()
-    #   with:
-    #     name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-    #     #path: ${{ env.FIRMWARE }}
-    #     #name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-    #     path: openwrt/bin
 
     # - name: Upload Firmware To Artifact
     #   if: steps.compile.outputs.status == 'success' && env.FIRMWARE_RELEASE == 'true'
@@ -233,7 +217,6 @@ jobs:
         artifacts: ${{ env.FIRMWARE_PATH }}/*
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        body_path: release.txt
         body: |
           ### 📒 固件信息
           - 💻 平台架构: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
